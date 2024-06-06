@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .calculator-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        .calculator-container h1 {
+            margin-bottom: 20px;
+        }
+        .calculator-container form {
+            display: flex;
+            flex-direction: column;
+        }
+        .calculator-container input, .calculator-container select, .calculator-container button {
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .calculator-container button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .calculator-container button:hover {
+            background-color: #45a049;
+        }
+        .calculator-container .answer {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Calculator</h1>
+        <form method="post" action="{% url 'index' %}">
+            {% csrf_token %}
+            <input type="number" name="first_number" required placeholder="First number">
+            <input type="number" name="sec_number" required placeholder="Second number">
+            <select name="operation" required>
+                <option value="add">Add</option>
+                <option value="subtract">Subtract</option>
+                <option value="multiply">Multiply</option>
+                <option value="divide">Divide</option>
+            </select>
+            <button type="submit">Calculate</button>
+        </form>
+        {% if answer is not none %}
+        <div class="answer">Answer: {{ answer }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
